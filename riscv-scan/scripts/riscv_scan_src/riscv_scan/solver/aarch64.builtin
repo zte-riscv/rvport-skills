@@ -1,0 +1,8 @@
+__builtin_aarch64_get_fpcr
+__builtin_aarch64_set_fpcr
+__builtin_aarch64_get_fpsr
+__builtin_aarch64_set_fpsr
+__builtin_aarch64_get_fpcr64
+__builtin_aarch64_set_fpcr64
+__builtin_aarch64_get_fpsr64
+__builtin_aarch64_set_fpsr64

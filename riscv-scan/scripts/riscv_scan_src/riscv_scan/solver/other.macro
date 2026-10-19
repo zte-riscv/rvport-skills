@@ -1,0 +1,17 @@
+__alpha__
+__370__
+__mips
+__MIPS__
+__powerpc64__
+__PPC64__
+__POWER8_VECTOR__
+__s390x__
+__powerpc__
+__ppc__
+__PPC__
+__ppc64__
+__mips__
+__mips64
+_MIPS_ARCH_MIPS64
+__zarch__
+__s390__

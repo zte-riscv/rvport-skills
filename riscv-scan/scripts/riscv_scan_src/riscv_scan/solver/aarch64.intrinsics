@@ -1,0 +1,16 @@
+arm_neon.h
+arm_sve.h
+arm_acle.h
+arm_fp16.h
+arm_bf16.h
+arm_sme.h
+arm_cde.h
+arm_cmse.h
+arm_neon_sve_bridge.h
+armpl.h
+armpl_interleave_batch.h
+amath.h
+armpl_complex.h
+armpl_int.h
+armpl_mpi_wrapper.h
+armpl_sparse.h

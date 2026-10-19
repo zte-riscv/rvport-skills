@@ -1,0 +1,119 @@
+{
+ "target": "/path/to/demo-project",
+ "suggestion_class_count": 5,
+ "missing_class_count": 2,
+ "suggestion_class": [
+  {
+   "class_type": "suggestion_class",
+   "file_name": "archdetect.cmake",
+   "file_path": "/path/to/demo-project/cmake/archdetect.cmake",
+   "solver_name": "CMakeSolver",
+   "solver_type": 10,
+   "solver_description": "构建脚本",
+   "start_line": 9,
+   "end_line": 13,
+   "migration_suggestion": "架构分支缺少RISC-V支持！需要添加类似分支;",
+   "status": "TODO",
+   "marking": "",
+   "tier": "warm",
+   "perf": null
+  },
+  {
+   "class_type": "suggestion_class",
+   "file_name": "simd_dispatch.hpp",
+   "file_path": "/path/to/demo-project/src/util/simd_dispatch.hpp",
+   "solver_name": "MacrosSolver",
+   "solver_type": 3,
+   "solver_description": "宏定义/架构宏分支",
+   "start_line": 55,
+   "end_line": 61,
+   "migration_suggestion": "simd_dispatch.hpp 按架构 include 各 arch 实现头，riscv64 分支缺失",
+   "tier": "hot",
+   "status": "TODO",
+   "marking": "",
+   "perf": null,
+   "arch_source": "none"
+  },
+  {
+   "class_type": "suggestion_class",
+   "file_name": "bitops.h",
+   "file_path": "/path/to/demo-project/src/arch/x86/bitops.h",
+   "solver_name": "InlineAsmSolver",
+   "solver_type": 4,
+   "solver_description": "内联汇编",
+   "start_line": 296,
+   "end_line": 306,
+   "migration_suggestion": "andn_impl：HAVE_BMI 时 __asm__ \"andn\" 强制生成 BMI ANDN 指令（302 行），可映射为 Zbb andn 指令",
+   "tier": "warm",
+   "status": "TODO",
+   "marking": "基础扫描器建议(已并入): 此处汇编与架构相关，请转换为适用于 RISC-V 架构的实现。",
+   "perf": null,
+   "arch_source": "x86_64"
+  },
+  {
+   "class_type": "suggestion_class",
+   "file_name": "impl.cpp",
+   "file_path": "/path/to/demo-project/src/vector/arch/arm/impl.cpp",
+   "solver_name": "IntrinsicsSolver",
+   "solver_type": 1,
+   "solver_description": "内联函数/intrinsic",
+   "start_line": 512,
+   "end_line": 531,
+   "migration_suggestion": "loadu/load (vld1q_s32 从指针加载), loadu_maskz (掩码 AND)，可改写为 __riscv_vle32_v_i32m1 + vmerge",
+   "tier": "hot",
+   "status": "TODO",
+   "marking": "",
+   "perf": null,
+   "arch_source": "arm"
+  },
+  {
+   "class_type": "suggestion_class",
+   "file_name": "scan_fallback.cpp",
+   "file_path": "/path/to/demo-project/src/string/scan_fallback.cpp",
+   "solver_name": "AutoVecHeuristic",
+   "solver_type": "AutoVecCandidate",
+   "solver_description": "纯 C 可向量化热点（x86/ARM 靠自动向量化，RV 侧无保证）",
+   "start_line": 576,
+   "end_line": 584,
+   "migration_suggestion": "反向扫描首个不等于目标字节的纯 C 回退循环：同一模式、无函数调用、无跨迭代依赖，适合改写为 RVV 向量化",
+   "tier": "warm",
+   "status": "TODO",
+   "marking": "",
+   "perf": null,
+   "arch_source": "none"
+  }
+ ],
+ "missing_class": [
+  {
+   "class_type": "missing_class",
+   "missing_path": "/path/to/demo-project/cmake/cflags-riscv64.cmake",
+   "is_file": true,
+   "existing_arch_paths": [
+    "/path/to/demo-project/cmake/cflags-x86.cmake",
+    "/path/to/demo-project/cmake/cflags-arm.cmake",
+    "/path/to/demo-project/cmake/cflags-generic.cmake"
+   ],
+   "migration_suggestion": "缺失 riscv64 编译选项文件（CMakeLists.txt 按架构 include，无此文件直接报错）。参考 cflags-generic.cmake 的最小接入写法。",
+   "status": "TODO",
+   "marking": ""
+  },
+  {
+   "class_type": "missing_class",
+   "missing_path": "/path/to/demo-project/src/arch/riscv64",
+   "is_file": false,
+   "existing_arch_paths": [
+    "/path/to/demo-project/src/arch/x86",
+    "/path/to/demo-project/src/arch/arm",
+    "/path/to/demo-project/src/arch/common"
+   ],
+   "migration_suggestion": "缺失 riscv64 架构目录：需 riscv64.h（被 src/arch.h 分发）、bitops.h、simd_types.h、simd_utils.h。对照 x86/arm 同名文件实现 RVV 版本。",
+   "status": "TODO",
+   "marking": ""
+  }
+ ],
+ "warnings": [
+  "精确重复条目合并: /path/to/demo-project/CMakeLists.txt:278-296 (solver_type=10)，保留信息更全的 Subagent 条目",
+  "重叠裁决丢弃: CMakeLists.txt:964-1059 (solver_type=10, src=base)；保留 921-1114 (src=phase1-scan-macros-build)；原因: 基础扫描器与 Subagent 条目重叠，以 Subagent 条目（信息更全）为准",
+  "solver_type 冲突归并: src/util/intrinsics.h:67-67 (type=1, src=base) 与 44-78 (type=3, src=phase1-scan-x86) 区间重叠，按映射表归并保留后者"
+ ]
+}

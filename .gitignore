@@ -1,0 +1,23 @@
+# 本地配置（可能含私有镜像凭据，勿提交）
+config.env
+
+# 工具链 / QEMU 运行时资产缓存（脚本按需下载，体积巨大）
+toolchains/
+qemu-static/
+env.d/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 验证产物（落 <project_root>/test/，不属于本仓库）
+test/
+
+# 编辑器 / 系统
+.DS_Store
+.idea/
+.vscode/
+*.swp

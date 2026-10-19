@@ -1,0 +1,6 @@
+# riscv-scan 扫描引擎（riscv_scan_src）Python 依赖
+# run_scan.sh 检测到缺失时自动安装；离线环境请手动执行：
+#   python3 -m pip install -r requirements.txt
+pyahocorasick
+treelib
+chardet
