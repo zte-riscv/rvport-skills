@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""源码文件读取与注释剥离。
+"""源码文件读取与注释剥离（对齐 server/plugin/codemig/main/source_file.py）。
 
 剔除 python-magic 文件类型探测（扫描入口只处理已知文本扩展名，二进制
 文件不会进入 solver），保留编码探测与 C/Makefile/Shell 三类注释剥离。

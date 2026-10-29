@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""内联汇编扫描。"""
+"""内联汇编扫描（对齐 server/plugin/codemig/solver/inline_asm_solver.py）。"""
 import re
 
 from .asm_arch import AsmArch

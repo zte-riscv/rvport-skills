@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""共享常量与工具。
+"""共享常量与工具（对齐 server/plugin/codemig/codemig_common/codemig_common_utils.py）。
 
 只保留扫描链路用到的部分，剔除数据库 / 路径配置等 Web 服务依赖。
 """
@@ -17,7 +17,15 @@ SOLVER_TYPE_BUILTIN = 2
 SOLVER_TYPE_MACROS = 3
 SOLVER_TYPE_INLINE_ASM = 4
 SOLVER_TYPE_ASM_FILE = 5
+SOLVER_TYPE_JAVA = 6
+SOLVER_TYPE_PYTHON = 7
+SOLVER_TYPE_GO = 8
+SOLVER_TYPE_SHELL_SRC = 9
 SOLVER_TYPE_BUILD_SCRIPT = 10
+SOLVER_TYPE_GO_RELEASER = 11
+SOLVER_TYPE_RUST = 12
+SOLVER_TYPE_RUST_TOML = 13
+SOLVER_TYPE_LIB = 100  # SoftwareSolver（动态库扫描）参考格式中无独立编号，仅内部使用
 
 SOLVER_DESCRIPTIONS = {
     SOLVER_TYPE_MAKEFILE: "Makefile",
@@ -26,7 +34,15 @@ SOLVER_DESCRIPTIONS = {
     SOLVER_TYPE_MACROS: "宏定义",
     SOLVER_TYPE_INLINE_ASM: "内联汇编",
     SOLVER_TYPE_ASM_FILE: "汇编文件",
+    SOLVER_TYPE_JAVA: "Java源代码",
+    SOLVER_TYPE_PYTHON: "Python源代码",
+    SOLVER_TYPE_GO: "Go源代码",
+    SOLVER_TYPE_SHELL_SRC: "Shell源代码",
     SOLVER_TYPE_BUILD_SCRIPT: "构建脚本",
+    SOLVER_TYPE_GO_RELEASER: "GO配置文件",
+    SOLVER_TYPE_RUST: "Rust源代码",
+    SOLVER_TYPE_RUST_TOML: "Rust配置文件",
+    SOLVER_TYPE_LIB: "软件包扫描",
 }
 
 

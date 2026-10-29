@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""CMake 构建脚本架构分支扫描。"""
+"""CMake 构建脚本架构分支扫描（对齐 server/plugin/codemig/solver/cmake_solver.py）。"""
 import re
 
 from treelib import Tree

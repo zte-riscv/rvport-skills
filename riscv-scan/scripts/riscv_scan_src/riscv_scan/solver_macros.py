@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""C/C++ 宏条件分支扫描。"""
+"""C/C++ 宏条件分支扫描（对齐 server/plugin/codemig/solver/macros_solver.py）。"""
 import os
 import re
 

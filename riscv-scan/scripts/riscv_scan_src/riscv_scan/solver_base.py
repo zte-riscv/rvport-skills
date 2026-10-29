@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""Solver 基类。"""
+"""Solver 基类（对齐 server/plugin/codemig/solver/solver.py，剔除 DB 依赖）。"""
 import os
 from abc import ABC, abstractmethod
 

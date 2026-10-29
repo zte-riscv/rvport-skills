@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""架构关键字检测。
+"""架构关键字检测（对齐 server/plugin/codemig/main/detect_arch/）。
 
 从 riscv.opcode / aarch64.opcode / x86_64.opcode 数据文件加载指令集，
 按「RISC-V 独有指令」判定一段汇编是否已经是 RISC-V 实现。
@@ -28,7 +28,7 @@ def _load_opcodes(name):
     return opcodes
 
 
-# ─── RISC-V───
+# ─── RISC-V（对齐 riscv_registers.py）───
 REG_EX = {"csr", "zero", "ra", "gp", "tp"}
 REG_SCR_M = {"mstatus", "mie", "mtvec", "mscratch", "mepc", "mcause", "mtval",
              "mip", "mvendorid", "marchid", "mimpid", "mhartid"}
@@ -53,7 +53,7 @@ def _create_riscv_registers():
 
 RISCV_KEYWORDS = set(_create_riscv_registers()) | set(_load_opcodes('riscv.opcode'))
 
-# ─── AArch64───
+# ─── AArch64（对齐 aarch64_registers.py）───
 AARCH64_KEYWORDS = {"svc"}
 
 
@@ -73,7 +73,7 @@ def _create_aarch64_registers():
 
 AARCH64_OPCODES = set(_load_opcodes('aarch64.opcode')) | set(_create_aarch64_registers())
 
-# ─── x86-64───
+# ─── x86-64（对齐 x86_64_keywords.py）───
 X86_64_KEYWORDS = {
     "syscall", "pause", "rdtsc", "rdtscp", "cpuid",
     "rax", "rbx", "rcx", "rdx", "rsi", "rdi", "rbp", "rsp",

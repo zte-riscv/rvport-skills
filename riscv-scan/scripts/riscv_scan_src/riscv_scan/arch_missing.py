@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""缺失 RISC-V 架构实现检测。
+"""缺失 RISC-V 架构实现检测（对齐编译版 riscv_scan 基础扫描器实测行为）。
 
 规则（经黑盒用例校准，与服务端旧版 arch_missing_process.py 有差异）：
 
@@ -30,11 +30,18 @@ import os
 import re
 from collections import defaultdict
 
-# 字面替换 token（区分大小写，长前缀优先）
+# 字面替换 token（区分大小写，长前缀优先；仅用于缺失名拼接）
 ARCH_STRIP_TOKENS = ('aarch64', 'amd64', 'x86', 'arm')
 
-# 架构变体检测（不区分大小写，无词边界 —— alarm.c/harmony.c 也命中）
+# 架构变体检测与分组 key 替换（不区分大小写，无词边界 —— alarm.c/harmony.c 也命中）
 ARCH_DETECT_RE = re.compile(r'aarch64|amd64|x86|arm', re.IGNORECASE)
+
+# 分组 key 用整词替换（arm64 -> *arch* 整体一个单元，而非 arm + 64）
+# 注意：正则交替从左到右取首个命中，长 token（aarch64_be/arm64be/amd64p32 等）
+# 必须排在短 token（aarch64/arm64/amd64）之前，否则永远匹配不到。
+ARCH_GROUP_RE = re.compile(r'aarch64_be|aarch_64|aarch64|amd64p32|amd64|x86_64|x86|'
+                           r'arm64be|arm64|armbe|armv8-a|armv9-a|armv8|armv9|arm',
+                           re.IGNORECASE)
 
 # riscv 已有实现检测（rv64 不算，与编译版一致）
 RISCV_DETECT_RE = re.compile(r'riscv64|risc-v|riscv(?!32)', re.IGNORECASE)
@@ -69,8 +76,8 @@ def _merge_star_sequences(text):
 
 
 def _group_key(stem):
-    """架构/ISA 关键字替换为占位符后的分组 key（不区分大小写）。"""
-    key = ARCH_DETECT_RE.sub('*arch*', stem)
+    """架构/ISA 关键字替换为占位符后的分组 key（不区分大小写，整词替换）。"""
+    key = ARCH_GROUP_RE.sub('*arch*', stem)
     key = ISA_OTHER_RE.sub('*isa*', key)
     return _merge_star_sequences(key)
 

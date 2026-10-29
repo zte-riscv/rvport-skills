@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
+
+
+# Copyright 2026 ZTE Corporation
+# SPDX-License-Identifier: Apache-2.0
 """riscv_scan — 最小可运行的 RISC-V 迁移扫描工程入口。
 
-独立维护的基础扫描链路
-
+从 zf-eco-tool 后端 server/plugin/codemig 提取的基础扫描链路
+（10 个 solver + 缺失架构目录/文件检测），去除 Web/DB/AI 依赖。
 
 用法:
     python3 riscv_scan.py <target_path> [-o <output.json>]

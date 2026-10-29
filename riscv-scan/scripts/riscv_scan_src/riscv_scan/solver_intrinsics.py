@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""intrinsic 头文件引用扫描。"""
+"""intrinsic 头文件引用扫描（对齐 server/plugin/codemig/solver/intrinsics_solver.py）。"""
 import os
 import re
 

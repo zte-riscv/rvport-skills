@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""__builtin_* 内置函数扫描。"""
+"""__builtin_* 内置函数扫描（对齐 server/plugin/codemig/solver/builtin_solver.py）。"""
 import os
 import re
 

@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""Makefile 架构参数扫描。"""
+"""Makefile 架构参数扫描（对齐 server/plugin/codemig/solver/makefile_solver.py）。"""
 import re
 
 from .common import CodeTooLong, SOLVER_TYPE_MAKEFILE, SOLVER_DESCRIPTIONS

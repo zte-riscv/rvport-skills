@@ -76,7 +76,14 @@ python3 "${RISCV_SKILLS_ROOT}/riscv-scan/scripts/riscv_scan_src/riscv_scan.py" "
 | `2` | `BuiltinSolver`（`__builtin_*` 架构内置函数） | **汇编完整闭环** |
 | `5` | `AsmFileSolver`（`.s`/`.S`/`.asm` 汇编文件） | **汇编完整闭环** |
 | `0` | `MakefileSolver`（Makefile 架构编译参数） | 轻量适配（构建系统接入） |
-| `10` | `CMakeSolver` / `BuildScriptSolver` / `BuildMesonSolver` / `ShellSourceCodeSolver`（构建系统与 shell 架构分支） | 轻量适配（构建系统接入） |
+| `10` | `CMakeSolver` / `BuildScriptSolver` / `BuildMesonSolver`（构建系统架构分支） | 轻量适配（构建系统接入） |
+| `9` | `ShellSourceCodeSolver`（shell 架构 case 分支与架构字面量） | 轻量适配（构建系统接入） |
+| `6` | `JavaSourceCodeSolver`（JNI 本地库加载） | 轻量适配 |
+| `7` | `PythonSourceCodeSolver` / `CythonSourceCodeSolver`（ctypes/cffi 动态加载与内嵌 C 代码） | 轻量适配 |
+| `8` | `GoSourceCodeSolver`（构建标签、`runtime.GOARCH` 分支、cgo 内嵌 C 代码） | 轻量适配（cgo 内嵌 C 命中 intrinsic/内联汇编时走汇编闭环） |
+| `11` | `GoReleaserYmlSolver`（GoReleaser goarch 架构列表） | 轻量适配（构建系统接入） |
+| `12` | `RustSourceCodeSolver`（`cfg(target_arch)`、内联 asm、架构 intrinsic） | 轻量适配（内联 asm/intrinsic 命中时走汇编闭环） |
+| `13` | `RustTomlSolver`（Cargo.toml / config.toml 架构条件段） | 轻量适配（构建系统接入） |
 
 > 枚举定义见扫描器源码 `${RISCV_SKILLS_ROOT}/riscv-scan/scripts/riscv_scan_src/riscv_scan/common.py`。并行扫描 Subagent 补充的条目用字符串标签（`InlineAsm` / `Builtin` 等），同样遵守本 schema。遇到未知整数值时，**回退到源码特征分流**（migrate 技能 SKILL.md 2.1 第 1–4 条），不得因枚举不认识而跳过条目。
 

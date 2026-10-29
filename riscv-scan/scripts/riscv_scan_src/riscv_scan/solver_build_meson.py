@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""meson.build 构建脚本扫描。"""
+"""meson.build 构建脚本扫描（对齐 server/plugin/codemig/solver/build_meson_solver.py）。"""
 import re
 
 from .common import SOLVER_TYPE_BUILD_SCRIPT, SOLVER_DESCRIPTIONS

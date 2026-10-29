@@ -1,7 +1,9 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""扫描编排。
+"""扫描编排（对齐 server/plugin/codemig/main/codemig_processor.py 与
+server/plugin/codemig/codemig_task_manager/codemig_task.py 的目录遍历，
+以及 C_sencond_processor.py 的跨 solver 行包含去重）。
 """
 import os
 from collections import defaultdict
@@ -17,6 +19,13 @@ from .solver_cmake import CMakeSolver
 from .solver_build_script import BuildScriptSolver
 from .solver_build_meson import BuildMesonSolver
 from .solver_shell import ShellSourceCodeSolver
+from .solver_python import PythonSourceCodeSolver
+from .solver_cython import CythonSourceCodeSolver
+from .solver_java import JavaSourceCodeSolver
+from .solver_go import GoSourceCodeSolver
+from .solver_go_releaser import GoReleaserYmlSolver
+from .solver_rust import RustSourceCodeSolver
+from .solver_rust_toml import RustTomlSolver
 from .common import matches_c_file
 
 MY_SOLVERS = [
@@ -30,11 +39,18 @@ MY_SOLVERS = [
     BuildMesonSolver,
     CMakeSolver,
     ShellSourceCodeSolver,
+    PythonSourceCodeSolver,
+    CythonSourceCodeSolver,
+    JavaSourceCodeSolver,
+    GoSourceCodeSolver,
+    GoReleaserYmlSolver,
+    RustSourceCodeSolver,
+    RustTomlSolver,
 ]
 
 
 def advise(solver_type):
-    """跨 solver 命中时的附加建议文本。"""
+    """跨 solver 命中时的附加建议文本（对齐 C_sencond_processor.advise）。"""
     return '仿照其他架构替换相关实现\n'
 
 
@@ -101,7 +117,7 @@ def process_file(file_path):
 
 
 def walk_project(root_path):
-    """遍历工程目录。
+    """遍历工程目录（对齐编译版 riscv_scan 行为：架构目录不跳过，照常扫描）。
 
     返回:
         (scanned_files, missing_files, missing_dirs)

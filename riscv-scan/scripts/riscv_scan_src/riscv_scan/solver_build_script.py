@@ -1,7 +1,7 @@
 # Copyright 2026 ZTE Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-"""configure.ac / .m4 构建脚本扫描。"""
+"""configure.ac / .m4 构建脚本扫描（对齐 server/plugin/codemig/solver/build_script_solver.py）。"""
 import re
 
 from .common import CodeTooLong, SOLVER_TYPE_BUILD_SCRIPT, SOLVER_DESCRIPTIONS
